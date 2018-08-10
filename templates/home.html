@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="utf-8" />
+<head>
+<title>Athira Clinic Center | Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
+*{margin:0; padding:0}
+body{ background-image:url(/static/assets/img/3adaa00f0d9454e6393e63563d473912.jpg); font-family: 'Source Sans Pro', sans-serif}
+.header1{width:100%; align-items:center; margin:0 auto; background-color: rgba(255, 255, 255, 0.6); padding-top:20px; padding-bottom:20px; margin-top:0px; border-bottom:dotted; border-bottom-color:#3B5998;}
+.form{width:500px; margin:0 auto; background-color: rgba(0, 0, 0, 0.7); margin-top:230px}
+.header{height:50px; background:#3B5998}
+.header h2{height:50px; line-height:50px; color:#fff; text-align:center}
+.login{padding:0 20px}
+.login span.un{width:10%; text-align:center; color:#fea300; border-radius:3px 0 0 3px}
+.text{background:#12192C; width:90%; border-radius:0 3px 3px 0; border:none; outline:none; color:#999; font-family: 'Source Sans Pro', sans-serif}
+.text,.login span.un{display:inline-block; vertical-align:top; height:40px; line-height:40px; background:#FFF;}
+
+.btn{height:40px; border:none; background:#3B5998; width:50%; outline:none; font-family: 'Source Sans Pro', sans-serif; font-size:20px; font-weight:bold; color:#eee; border-bottom:solid 3px #fff; border-radius:3px; cursor:pointer}
+ul li{height:40px; text-align:center; margin:15px 0; list-style:none}
+.span{display:table; text-align:center; width:100%; font-size:17px;}
+.ch{display:inline-block; width:50%; color:#CCC}
+.ch a{color:#FFF; text-decoration:none}
+.ch:nth-child(2){text-align:right}
+
+@media(max-width:480px){ .form{width:100%}}
+</style>
+</head>
+<body>
+<div class="header1" align="center">
+	<h1 style="color:#fea300;">Athira Clinic Center</h1>
+<!-- <img src="/static/assets/img/Niyata_Logo_Final_Blue_Harish.png" width="196" height="90" alt=""/> -->
+</div>
+<div class="form">
+<div class="header"><h2>Admin Login</h2></div>
+<div class="login">
+	<div align="center" style="color:#ffffff;font-weight:bold;">
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{message}}</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+<form action="." method="post">{% csrf_token %}
+<ul>
+<li>
+<span class="un"><i class="fa fa-envelope"></i></span><input type="email" name="email" required class="text" placeholder="User Email" /></li>
+<li>
+<span class="un"><i class="fa fa-lock"></i></span><input type="password" name="password" required class="text" placeholder="User Password" /></li>
+<li>
+	<button type="submit" class="btn">Login</button>
+</li>
+<li><div class="span"><span class="ch"><a href="">Forgot Password?</a></span></div></li>
+</ul>
+</form>
+</div>
+</div>
+</body>
+</html>
