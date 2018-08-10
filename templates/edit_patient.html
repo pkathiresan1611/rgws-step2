@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Athira Clinic Center | Add Patient{% endblock %}
+{% block title %}Athira Clinic Center | Edit Patient{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Add Patient
+            Edit Patient
         </h1>
     </div>
 </div>
@@ -43,30 +43,32 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Salutation</label>
-						<select class="form-control input-sm" id="id_salutation" name="salutation" >
+						<select class="form-control input-sm" id="id_salutation" name="salutation" value="{{patient_id.salutation}}">
 							<option value="">-------</option>
-							{% for sl in salutation_list %}
-								<option value="{{sl}}">{{sl}}</option>
-							{% endfor %}
+							{% if patient_id.salutation %}
+								{% for sl in salutation_list %}
+									<option value="{{sl}}">{{sl}}</option>
+								{% endfor %}
+							{% endif %}
 						</select>
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text"  class="form-control input-sm" name="name" id="id_name" placeholder="Enter Name" />
+						<input type="text"  class="form-control input-sm" name="name" id="id_name" value="{{patient_id.name|default_if_none:''}}" placeholder="Enter Name" />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Date of Registration</label>
-						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_reg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_reg" value="{{date_of_reg.value|default_if_none:''|date:'d-m-Y'}}" />
+						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_reg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_reg" value="{{patient_id.date_of_reg|default_if_none:''|date:'d-m-Y'}}" />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Date of Birth</label>
-						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_birth" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_birth" value="{{date_of_birth.value|default_if_none:''|date:'d-m-Y'}}" />
+						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_birth" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_birth" value="{{patient_id.date_of_birth|default_if_none:''|date:'d-m-Y'}}" />
 					</div>
 				</div>
 			</div>
@@ -75,7 +77,7 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Age</label>
-						<input type="text"  class="form-control input-sm" name="age" id="id_age" placeholder="Enter Age" />
+						<input type="text"  class="form-control input-sm" name="age" id="id_age" value="{{patient_id.age|default_if_none:''}}" placeholder="Enter Age" />
 					</div>
 				</div>
 				<div class="col-lg-3">
@@ -92,7 +94,7 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Birth Place</label>
-						<input type="text"  class="form-control input-sm" name="birth_place" id="id_birth_place" placeholder="Enter Birth Place" />
+						<input type="text"  class="form-control input-sm" name="birth_place" id="id_birth_place" value="{{patient_id.birth_place|default_if_none:''}}" placeholder="Enter Birth Place" />
 					</div>
 				</div>
 				<div class="col-lg-3">
@@ -134,7 +136,7 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Occupation History</label>
-						<input type="text"  class="form-control input-sm" name="ocp_history" id="id_ocp_history" placeholder="Enter Occupation History" />
+						<input type="text"  class="form-control input-sm" name="ocp_history" id="id_ocp_history" value="{{patient_id.ocp_history|default_if_none:''}}" placeholder="Enter Occupation History" />
 					</div>
 				</div>
 				<div class="col-lg-3">
@@ -153,13 +155,13 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Mobile No.</label>
-						<input type="text" class="form-control input-sm"  name="mobile_no" id="id_mobile_no" placeholder="Enter Mobile No" />
+						<input type="text" class="form-control input-sm"  name="mobile_no" id="id_mobile_no" value="{{patient_id.mobile_no|default_if_none:''}}" placeholder="Enter Mobile No" />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Email ID</label>
-						<input type="text"  class="form-control input-sm" name="email" id="id_email" placeholder="Enter Email ID" />
+						<input type="text"  class="form-control input-sm" name="email" id="id_email" value="{{patient_id.email|default_if_none:''}}" placeholder="Enter Email ID" />
 					</div>
 				</div>
 			</div>
@@ -170,7 +172,7 @@
 				<div class="col-lg-9">
 					<div class="form-group">
 						<label>Address Details</label>
-						<textarea class="form-control input-sm"  name="pa_address_detail" id="id_pa_address_detail" placeholder="Enter Address">{{pa_address_detail|default_if_none:''}}</textarea>
+						<textarea class="form-control input-sm"  name="pa_address_detail" id="id_pa_address_detail" placeholder="Enter Address">{{patient_id.pa_address_detail|default_if_none:''}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -215,7 +217,7 @@
 				<div class="col-lg-9">
 					<div class="form-group">
 						<label>Address Details</label>
-						<textarea class="form-control input-sm"  name="ta_address_detail" id="id_ta_address_detail" placeholder="Enter Address">{{ta_address_detail|default_if_none:''}}</textarea>
+						<textarea class="form-control input-sm"  name="ta_address_detail" id="id_ta_address_detail" placeholder="Enter Address">{{patient_id.ta_address_detail|default_if_none:''}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -271,19 +273,19 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="" class="form-control input-sm"  name="rf_name" id="id_rf_name" placeholder="Enter Name">
+						<input type="" class="form-control input-sm"  name="rf_name" id="id_rf_name" value="{{patient_id.rf_name|default_if_none:''}}" placeholder="Enter Name">
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Specialization</label>
-						<input type="text"  class="form-control input-sm" name="specialization" id="id_specialization" placeholder="Enter Specialization">
+						<input type="text"  class="form-control input-sm" name="specialization" id="id_specialization" value="{{patient_id.specialization|default_if_none:''}}" placeholder="Enter Specialization">
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
 						<label>Mobile No.</label>
-						<input type="text"  class="form-control input-sm" name="contact" id="id_contact" placeholder="Enter Mobile No">
+						<input type="text"  class="form-control input-sm" name="contact" id="id_contact" value="{{patient_id.contact|default_if_none:''}}" placeholder="Enter Mobile No">
 					</div>
 				</div>
 			</div>
@@ -291,7 +293,7 @@
 				<div class="col-lg-9">
 					<div class="form-group">
 						<label>Address Details</label>
-						<textarea class="form-control input-sm"  name="address" id="id_address" placeholder="Enter Address">{{address|default_if_none:''}}</textarea>
+						<textarea class="form-control input-sm"  name="address" id="id_address" placeholder="Enter Address">{{patient_id.address|default_if_none:''}}</textarea>
 					</div>
 				</div>
 			</div>
@@ -325,7 +327,7 @@
 				<div class="col-lg-9">
 					<div class="form-group">
 						<label>Notes</label>
-						<textarea class="form-control input-sm"  name="notes" id="id_notes" placeholder="Enter Notes">{{notes|default_if_none:''}}</textarea>
+						<textarea class="form-control input-sm"  name="notes" id="id_notes" placeholder="Enter Notes">{{patient_id.notes|default_if_none:''}}</textarea>
 					</div>
 				</div>
 			</div>

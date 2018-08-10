@@ -12,5 +12,8 @@ urlpatterns = [
     path('logout/', accounts_views.logout, name="logout"),
     path('dashboard/',views.dashboard,name='dashboard'),
     path('add_patient/',views.add_patient,name='add_patient'),
+    path('edit_patient/<int:patient_id>/',views.edit_patient,name='edit_patient'),
+    path('delete_patient/<int:patient_id>/',views.delete_patient,name='delete_patient'),
+
     path('admin/', admin.site.urls),
 ]
