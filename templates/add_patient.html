@@ -53,20 +53,20 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
-						<label>Name</label>
-						<input type="text"  class="form-control input-sm" name="name" id="id_name" placeholder="Enter Name" />
+						<label>Name</label>*
+						<input type="text"  class="form-control input-sm" name="name" id="id_name" placeholder="Enter Name" required />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
-						<label>Date of Registration</label>
-						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_reg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_reg" value="{{date_of_reg.value|default_if_none:''|date:'d-m-Y'}}" />
+						<label>Date of Registration</label>*
+						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_reg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_reg" value="{{date_of_reg.value|default_if_none:''|date:'d-m-Y'}}" required />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="form-group">
-						<label>Date of Birth</label>
-						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_birth" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_birth" value="{{date_of_birth.value|default_if_none:''|date:'d-m-Y'}}" />
+						<label>Date of Birth</label>*
+						<input type="text" class="form-control input-sm datepicker"  id="id_date_of_birth" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" name="date_of_birth" value="{{date_of_birth.value|default_if_none:''|date:'d-m-Y'}}" required />
 					</div>
 				</div>
 			</div>
