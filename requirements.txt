@@ -3,3 +3,4 @@ jdcal==1.2
 openpyxl==2.3.5
 six==1.11.0
 psycopg2==2.7.5
+Pillow==5.2.0

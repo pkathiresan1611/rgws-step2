@@ -50,6 +50,13 @@ INCOME_CHOICE  = (
 	("Higher(>30,000/m)","Higher(>30,000/m)" ),
 	)
 
+def upload_files(instance,filename):
+    return "upload_files/%s_%s"%(str(time()).replace('.','_'),filename)
+
+
+def file_upload(instance,filename):
+    return "file_upload/%s_%s"%(str(time()).replace('.','_'),filename)
+
 
 
 class PatientData(models.Model):
@@ -80,7 +87,7 @@ class PatientData(models.Model):
 	specialization         	= models.CharField(max_length=255, blank=True, null=True)
 	contact                	= models.CharField(max_length=255,blank=True, null=True)
 	address                	= models.TextField(max_length=255, blank=True, null=True)
-	upload_file 			= models.ImageField(upload_to='upload_files',blank=True)
+	upload_file 			= models.ImageField(upload_to=upload_files,blank=True)
 	# image                  	= models.FileField(upload_to=image_upload, blank=True)
 	notes     				= models.TextField(max_length=255, blank=True, null=True)    
 
@@ -89,3 +96,15 @@ class PatientData(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Patient Data"
+
+
+class PatientFiles(models.Model):
+	patient		   		   = models.ForeignKey('PatientData', verbose_name='Patient',on_delete=models.CASCADE,blank=True, null=True)
+	upload_files           = models.FileField(upload_to=file_upload, blank=True, null=True)
+
+	def __str__(self):
+		return u'%s' % (self.patient.name)
+
+	class Meta:
+		verbose_name_plural = "Patient Files"
+

@@ -242,6 +242,7 @@ def edit_patient(request, patient_id):
 		patient_id.education = education
 		patient_id.occupation = occupation
 		patient_id.ocp_history = ocp_history
+		patient_id.income = income
 		patient_id.mobile_no = mobile_no
 		patient_id.email = email
 		patient_id.pa_address_detail = pa_address_detail

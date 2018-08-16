@@ -296,7 +296,7 @@
 				</div>
 			</div>
 
-           	<h4>Sound / Video / Text file</h4>
+           	<h4>Sound or Video or Text file</h4>
            	<hr>
 			<div class="row">
 			   <!-- div class="col-lg-9">
@@ -326,13 +326,13 @@
 			            <table class="table table-striped table-bordered" id="example">
 			                <thead>
 			                    <tr>
-			                        <th>Upload File Name</th>
+			                        <th>Uploaded File Name</th>
 			                        <th>Action</th>
 			                    </tr>
 			                </thead>
 			                <tbody>
 		                        <tr>
-		                            <td align="center"><a href="">{{patient_id.upload_file}}</a></td>
+		                            <td align="center"><a href="/media/{{patient_id.upload_file}}">{{patient_id.upload_file|stringformat:"s"|slice:"12:"}}</a></td>
 									<td align="center">
 										<a href="" class="delete" style="color:red"><i class="fa fa-trash"></i></a>
 									</td>
@@ -404,7 +404,7 @@
 
 	$(".delete").easyconfirm({locale: {
 	    title: 'Confirmation Alert!',
-	    text: 'Are you sure want to delete this patient?',
+	    text: 'Are you sure want to delete this file?',
 	}});
 
 </script>

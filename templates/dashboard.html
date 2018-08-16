@@ -37,9 +37,9 @@
             <tr>
               <td align="center">{{forloop.counter}}</td>
               <td>{{pl.name}}</td>
-              <td>{{pl.date_of_reg|date:'d/m/Y'|default_if_none:''}}</td>
+              <td>{{pl.date_of_reg|date:'d-m-Y'|default_if_none:''}}</td>
               <td>{{pl.mobile_no}}</td>
-              <td align="center">{{pl.id}}</td>
+              <td align="center">REG-NO-{{pl.id}}</td>
               <td align="center">{{pl.age}}</td>
               <td>{{pl.gender}}</td>
               <td align="center">{{pl.pa_city|default_if_none:''}}</td>
