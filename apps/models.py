@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.text import slugify
 from django.utils import timezone
 from time import time
 from datetime import datetime
@@ -27,84 +28,71 @@ GENDER_CHOICE  = (
 	("Transgender","Transgender" ),
 	)
 
-OCCP_CHOICE  = (
-	("Self", "Self" ),
-	("Salaried","Salaried" ),
-	("Student","Student" ),
-	("Professional", "Professional"),
-	("House wife", "House wife"),
-	("Retired", "Retired"),
-	("Unemployed", "Unemployed"),
-	)
-
-EDU_CHOICE  = (
-	("Illiterate", "Illiterate" ),
-	("Schooling","Schooling" ),
-	("UG","UG" ),
-	("PG", "PG"),
-	)
-
-INCOME_CHOICE  = (
-	("Lower(<10,000/m)", "Lower(<10,000/m)" ),
-	("Middle(10,000-30,000/m)","Middle(10,000-30,000/m)" ),
-	("Higher(>30,000/m)","Higher(>30,000/m)" ),
-	)
-
-def upload_files(instance,filename):
-    return "upload_files/%s_%s"%(str(time()).replace('.','_'),filename)
 
 
-def file_upload(instance,filename):
-    return "file_upload/%s_%s"%(str(time()).replace('.','_'),filename)
 
+# def file_upload(instance,filename):
+#     return "file_upload/%s_%s"%(str(time()).replace('.','_'),filename)
+
+def file_upload(instance, filename):
+    title = instance.id
+    slug = slugify(title)
+    return "file_upload/%s-%s" % (slug, filename)
 
 
 class PatientData(models.Model):
 	date_of_reg            	= models.DateField(blank=True, null=True)
 	salutation             	= models.CharField(max_length=50,blank=True, null=True, choices=SALUTATION_CHOICE)
 	name                   	= models.CharField(max_length=255, blank=True, null=True)
-	date_of_birth          	= models.DateField(blank=True, null=True)
 	age                    	= models.CharField(max_length=255,blank=True, null=True)
 	gender                 	= models.CharField(max_length=50,blank=True, null=True, choices=GENDER_CHOICE)
-	birth_place            	= models.CharField(max_length=255, blank=True, null=True)
-	country_of_birth       	= models.CharField(max_length=50,blank=True, null=True, choices=gv.COUNTRY_CHOICE)
-	education              	= models.CharField(max_length=50,blank=True, null=True, choices=EDU_CHOICE)
-	occupation             	= models.CharField(max_length=50,blank=True, null=True, choices=OCCP_CHOICE)
-	ocp_history            	= models.CharField(max_length=255, blank=True, null=True)
-	income                 	= models.CharField(max_length=50,blank=True, null=True, choices=INCOME_CHOICE)
 	mobile_no        		= models.CharField(max_length=255,blank=True, null=True)
 	email            		= models.CharField(max_length=255, blank=True, null=True)
 	pa_address_detail     	= models.TextField(max_length=255,blank=True, null=True)
 	pa_city                	= models.CharField(max_length=50,blank=True, null=True, choices=gv.CITY_CHOICE)
-	pa_state               	= models.CharField(max_length=50,blank=True, null=True, choices=gv.STATE_CHOICE)
-	pa_country             	= models.CharField(max_length=50,blank=True, null=True, choices=gv.COUNTRY_CHOICE)
-	ta_address_detail     	= models.TextField(max_length=255,blank=True, null=True)
-	ta_city                	= models.CharField(max_length=50,blank=True, null=True, choices=gv.CITY_CHOICE)
-	ta_state               	= models.CharField(max_length=50,blank=True, null=True, choices=gv.STATE_CHOICE)
-	ta_country             	= models.CharField(max_length=50,blank=True, null=True, choices=gv.COUNTRY_CHOICE)
-	rf_salutation  			= models.CharField(max_length=50,blank=True, null=True, choices=SALUTATION_CHOICE)
-	rf_name         		= models.CharField(max_length=255, blank=True, null=True)
-	specialization         	= models.CharField(max_length=255, blank=True, null=True)
-	contact                	= models.CharField(max_length=255,blank=True, null=True)
 	address                	= models.TextField(max_length=255, blank=True, null=True)
-	upload_file 			= models.ImageField(upload_to=upload_files,blank=True)
-	# image                  	= models.FileField(upload_to=image_upload, blank=True)
 	notes     				= models.TextField(max_length=255, blank=True, null=True)    
 
 	def __str__(self):
-		return u'%s %s %s %s' % (self.name, self.age, self.gender, self.date_of_reg)
+		return u'%s-%s-%s-%s' % (self.name, self.age, self.gender, self.date_of_reg)
 
 	class Meta:
 		verbose_name_plural = "Patient Data"
 
 
 class PatientFiles(models.Model):
-	patient		   		   = models.ForeignKey('PatientData', verbose_name='Patient',on_delete=models.CASCADE,blank=True, null=True)
+	patient		   		   = models.ForeignKey(PatientData, verbose_name='Patient',on_delete=models.CASCADE,blank=True, null=True)
 	upload_files           = models.FileField(upload_to=file_upload, blank=True, null=True)
 
 	def __str__(self):
-		return u'%s' % (self.patient.name)
+		return u'%s---%s' % (self.patient.name, self.upload_files)
 
 	class Meta:
 		verbose_name_plural = "Patient Files"
+
+
+class Diagnosis(models.Model):
+	patient		   		   	= models.ForeignKey(PatientData, verbose_name='Patient',on_delete=models.CASCADE,blank=True, null=True)
+	diagnosis             	= models.TextField(max_length=255,blank=True,null=True)
+
+	def __str__(self):
+		return u'%s-%s' % (self.patient.name, self.diagnosis)
+
+	class Meta:
+		verbose_name_plural = "Diagnosis"
+
+
+class Prescription(models.Model):
+	pateint_diagnosis		= models.ForeignKey(Diagnosis, verbose_name='Diagnosis',on_delete=models.CASCADE,blank=True, null=True)
+	tablet                  = models.CharField(max_length=255,blank=True,null=True)
+	mrg_count               = models.CharField(max_length=255,blank=True,null=True)
+	aft_count               = models.CharField(max_length=255,blank=True,null=True)
+	nit_count        		= models.CharField(max_length=255,blank=True,null=True)
+	tab_qty            		= models.CharField(max_length=255,blank=True,null=True)
+	
+	def __str__(self):
+		return u'%s-%s-%s' % (self.pateint_diagnosis.patient.name, self.pateint_diagnosis.diagnosis, self.tablet)
+
+	class Meta:
+		verbose_name_plural = "Prescription"
 

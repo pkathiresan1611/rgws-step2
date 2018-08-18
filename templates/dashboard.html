@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
-{% block title %}Athira Clinic Center | Dashbaord{% endblock %}
+{% block title %}Adhiran Medical Center | Dashbaord{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Dashboard
+            Patient Data Info
         </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 <div class="row">
@@ -36,7 +48,7 @@
           {% for pl in patient_list %}
             <tr>
               <td align="center">{{forloop.counter}}</td>
-              <td>{{pl.name}}</td>
+              <td><a href="{% url 'add_prescription' pl.id %}">{{pl.name}}</a></td>
               <td>{{pl.date_of_reg|date:'d-m-Y'|default_if_none:''}}</td>
               <td>{{pl.mobile_no}}</td>
               <td align="center">REG-NO-{{pl.id}}</td>

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block title %}Adhiran Medical Center | Add Prescription{% endblock %}
+{% block content %}
+<style type="text/css">
+	#printcontent p{
+    margin-left: 40px !important;
+}
+
+.prnt {
+    margin-top: 50px;
+}
+
+@media print {
+   .prnt {
+        margin-top: -30px;
+    }
+}
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Add Prescription
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+			<div class="row">
+                <div class="col-lg-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{ message }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-lg-12">
+					<div class="pull-right">
+						<a href="{% url 'dashboard' %}" class="btn btn-danger btn-md"><i class="fa fa-times"></i> Cancel</a>
+						<button class="btn btn-success btn-md" type="submit" name="save" value="save"><i class="fa fa-save"></i> Save</button>
+						<a id="hrefPrint" href="#" class="btn btn-info btn-md plus">Print Presciption</a>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="form-group">
+						<label>Diagnosis</label>
+						<textarea class="form-control input-sm"  name="diagnosis" id="id_diagnosis" placeholder="Enter diagnosis" required></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="input_fields_wrap">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label>Tablet</label>
+							<input type="text"  class="form-control input-sm" name="tablet" id="id_tablet" placeholder="Enter Tablet Name" required />
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label>Morning</label>
+							<input type="number"  class="form-control input-sm" name="mrg_count" id="id_mrg_count" value="0" placeholder="Morning Count" />
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label>Afternoon</label>
+							<input type="number"  class="form-control input-sm" name="aft_count" id="id_aft_count" value="0" placeholder="Afternoon Count" />
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label>Night</label>
+							<input type="number"  class="form-control input-sm" name="nit_count" id="id_nit_count" value="0" placeholder="Night Count" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="form-group">
+							<label>Quantity</label>
+							<input type="number"  class="form-control input-sm" name="tab_qty" id="id_tab_qty" placeholder="Enter Quantity" value="0" required />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-2">
+		                <a href="#" class="add_field_button" style="margin-top: 25px; margin-left: 0px;"><button class="btn btn-success btn-sm">Add</button></a>
+		            </div>
+	            </div>
+	            <br>
+			</div>
+			<br><br>
+			<!-- <div class="row" style="margin-top:30px;">
+			    <div class="col-lg-9">
+			        <div class="table-responsive">
+			            <table class="table table-striped table-bordered" id="example">
+			                <thead>
+			                    <tr>
+			                        <th>Diagnosis Name</th>
+			                        <th>Tablet</th>
+			                        <th>Morning count</th>
+			                        <th>Afternoon count</th>
+			                        <th>Night count</th>
+			                        <th>Tablet Quantity</th>
+			                        <th>Action</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                	{% for pl in prescription_list %}
+		                        <tr>
+		                            <td>{{pl.pateint_diagnosis.diagnosis}}</td>
+		                            <td>{{pl.tablet}}</td>
+		                            <td align="center">{{pl.mrg_count}}</td>
+		                            <td align="center">{{pl.aft_count}}</td>
+		                            <td align="center">{{pl.nit_count}}</td>
+		                            <td align="center">{{pl.tab_qty}}</td>
+									<td align="center">
+										<a href=""><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+										<a href="" class="delete" style="color:red"><i class="fa fa-trash"></i></a>
+									</td>
+		                        </tr>
+		                        {% empty %}
+		                        <tr>
+					              <td colspan="7" class="text-center bg-warning">No Data Found</td>
+					            </tr>
+					            {% endfor %}
+			                </tbody>
+			            </table>
+			        </div>
+			    </div>
+			</div> -->
+			<div class="row" style="margin-top:30px;">
+			    <div class="col-lg-12">
+			        <div class="table-responsive">
+			            <table class="table table-striped table-bordered" id="example">
+			                <thead>
+                                <tr>
+                                    <th rowspan="2">Diagnosis Name</th>
+                                    <th colspan="5">Prescription</th>
+                                    <th style="width: 90px;" rowspan="2">Action</th>
+                                </tr>
+                                <tr>
+                                    <th>Tablet</th>
+                                    <th>Morning count</th>
+                                    <th>Afternoon count</th>
+                                    <th>Night count</th>
+                                    <th>Tablet Quantity</th>
+                                </tr>
+                            </thead>
+			                <tbody>
+			                	{% for pl in prescription_list %}
+			                	<tr>
+                                    <td>{{pl.pateint_diagnosis.diagnosis}}</td>
+		                            <td>{{pl.tablet}}</td>
+		                            <td align="center">{{pl.mrg_count}}</td>
+		                            <td align="center">{{pl.aft_count}}</td>
+		                            <td align="center">{{pl.nit_count}}</td>
+		                            <td align="center">{{pl.tab_qty}}</td>
+                                    <td align="center">
+										<a href="" class="delete" style="color:red"><i class="fa fa-trash"></i></a>
+									</td>
+                                </tr>
+                                {% empty %}
+		                        <tr>
+					              <td colspan="7" class="text-center bg-warning">No Data Found</td>
+					            </tr>
+					            {% endfor %}
+			                </tbody>
+			            </table>
+			        </div>
+			    </div>
+			</div>
+
+			<div class="row" style="display:none;">
+                <div class="col-sm-12">
+                    <div class="prnt" id="printcontent">
+                    	<div class="pull-right"><strong style="margin-right:70px">Diagnosis</strong></div>
+						<p>
+						{% for pl in prescription_latest_list %}
+						    {{pl.pateint_diagnosis.diagnosis}}
+						{% endfor %}
+						</p>
+                    </div>
+                </div>
+            </div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="pull-right">
+						<a href="{% url 'dashboard' %}" class="btn btn-danger btn-md"><i class="fa fa-times"></i> Cancel</a>
+						<button class="btn btn-success btn-md" type="submit" name="save" value="save"><i class="fa fa-save"></i> Save</button>
+						<a id="hrefPrint" href="#" class="btn btn-info btn-md plus">Print Presciption</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    var max_fields      = 10; 
+    var wrapper         = $(".input_fields_wrap"); 
+    var add_button      = $(".add_field_button");
+    
+    var x = 1;
+    $(add_button).on("click",function(e){
+        e.preventDefault();
+        if(x < max_fields){ 
+            x++;
+            $(wrapper).append('<div class="row"><div class="col-lg-3"><div class="form-group"><label>Tablet</label><input type="text"  class="form-control input-sm" name="tablet" id="id_tablet" placeholder="Enter Tablet Name" required /></div></div><div class="col-lg-3"><div class="form-group"><label>Morning</label><input type="number"  class="form-control input-sm" name="mrg_count" id="id_mrg_count" value="0" placeholder="Morning Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Afternoon</label><input type="number"  class="form-control input-sm" name="aft_count" id="id_aft_count" value="0" placeholder="Afternoon Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Night</label><input type="number"  class="form-control input-sm" name="nit_count" id="id_nit_count" value="0" placeholder="Night Count" /></div></div></div><div class="row"><div class="col-lg-3"><div class="form-group"><label>Quantity</label><input type="number"  class="form-control input-sm" name="tab_qty" id="id_tab_qty" value="0" placeholder="Enter Quantity" required /></div><div class="row"></div"></div><a href="#" class="remove_field" style="margin-left:3px"><span class="fa fa-trash-o" style="color:red"></span></a>');
+        }
+    });
+    
+    
+    $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+});
+
+	$(function() {
+        $("#hrefPrint").click(function() {
+            $("#printcontent").print();
+                return (false);
+        });
+    });
+
+</script>
+{% endblock %}
