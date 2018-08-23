@@ -169,7 +169,7 @@
 		                            <td align="center">{{pl.nit_count}}</td>
 		                            <td align="center">{{pl.tab_qty}}</td>
                                     <td align="center">
-										<a href="" class="delete" style="color:red"><i class="fa fa-trash"></i></a>
+										<a href="{% url 'delete_prescription' patient_id.id pl.id %}" class="delete" style="color:red"><i class="fa fa-trash"></i></a>
 									</td>
                                 </tr>
                                 {% empty %}
@@ -184,18 +184,31 @@
 			</div>
 
 			<div class="row" style="display:none;">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <div class="prnt" id="printcontent">
-                    	<div class="pull-right"><strong style="margin-right:70px">Diagnosis</strong></div>
-						<p>
-						{% for pl in prescription_latest_list %}
-						    {{pl.pateint_diagnosis.diagnosis}}
-						{% endfor %}
-						</p>
+                    	<div class="row">
+                    		<div class="col-lg-3">
+								<div class="form-group">
+									<strong>Date: </strong>
+								</div>
+							</div>
+	                    	<div class="col-lg-9">
+	                    		<div class="form-group">
+									<strong>Diagnosis: </strong>{{diagnosis_lat_list.diagnosis}}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+							{% for pl in prescription_lat_list %}
+								<ul><li>{{pl.tablet}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{pl.mrg_count}}-{{pl.aft_count}}-{{pl.nit_count}}---->{{pl.tab_qty}}</li></ul>
+							{% endfor %}
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
-
+            <br><br>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="pull-right">
@@ -209,8 +222,22 @@
 	</div>
 </div>
 
+<link rel="stylesheet" href="/static/assets/css/jquery-ui.css">
+<style>
+    .ui-widget-header {
+        background: none;
+        background-color: yellow;
+        border: 1px solid #aaaaaa ;
+        color: #222222 ;
+        font-weight: bold;
+    }
+</style>
+<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.min.css">
+<script src="/static/assets/js/jquery.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="/static/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery.easy-confirm-dialog.js"></script>
+<script type="text/javascript" src="/static/assets/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
     var max_fields      = 10; 
@@ -222,7 +249,7 @@
         e.preventDefault();
         if(x < max_fields){ 
             x++;
-            $(wrapper).append('<div class="row"><div class="col-lg-3"><div class="form-group"><label>Tablet</label><input type="text"  class="form-control input-sm" name="tablet" id="id_tablet" placeholder="Enter Tablet Name" required /></div></div><div class="col-lg-3"><div class="form-group"><label>Morning</label><input type="number"  class="form-control input-sm" name="mrg_count" id="id_mrg_count" value="0" placeholder="Morning Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Afternoon</label><input type="number"  class="form-control input-sm" name="aft_count" id="id_aft_count" value="0" placeholder="Afternoon Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Night</label><input type="number"  class="form-control input-sm" name="nit_count" id="id_nit_count" value="0" placeholder="Night Count" /></div></div></div><div class="row"><div class="col-lg-3"><div class="form-group"><label>Quantity</label><input type="number"  class="form-control input-sm" name="tab_qty" id="id_tab_qty" value="0" placeholder="Enter Quantity" required /></div><div class="row"></div"></div><a href="#" class="remove_field" style="margin-left:3px"><span class="fa fa-trash-o" style="color:red"></span></a>');
+            $(wrapper).append('<div class="row"><div class="col-lg-3"><div class="form-group"><label>Tablet</label><input type="text"  class="form-control input-sm" name="tablet" id="id_tablet" placeholder="Enter Tablet Name" required /></div></div><div class="col-lg-3"><div class="form-group"><label>Morning</label><input type="number"  class="form-control input-sm" name="mrg_count" id="id_mrg_count" value="0" placeholder="Morning Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Afternoon</label><input type="number"  class="form-control input-sm" name="aft_count" id="id_aft_count" value="0" placeholder="Afternoon Count" /></div></div><div class="col-lg-3"><div class="form-group"><label>Night</label><input type="number"  class="form-control input-sm" name="nit_count" id="id_nit_count" value="0" placeholder="Night Count" /></div></div></div><div class="row"><div class="col-lg-3"><div class="form-group"><label>Quantity</label><input type="number"  class="form-control input-sm" name="tab_qty" id="id_tab_qty" value="0" placeholder="Enter Quantity" required /></div><div class="row"></div"></div>');
         }
     });
     
@@ -240,6 +267,18 @@
                 return (false);
         });
     });
+
+    $(document).ready(function() {
+    $('#example').DataTable({
+    	"ordering": false
+    });
+
+} );
+
+    $(".delete").easyconfirm({locale: {
+	    title: 'Confirmation Alert!',
+	    text: 'Are you sure want to delete this prescription?',
+	}});
 
 </script>
 {% endblock %}

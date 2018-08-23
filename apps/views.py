@@ -165,8 +165,13 @@ def add_prescription(request, patient_id):
 	diagnosis_list = Diagnosis.objects.filter(patient=patient_id)
 	prescription_list = Prescription.objects.filter(pateint_diagnosis__in=diagnosis_list).order_by('-pateint_diagnosis')
 	args['prescription_list'] = prescription_list
-	prescription_latest_list = Prescription.objects.all().order_by('-id')
-	args['prescription_latest_list'] = prescription_latest_list
+	try:
+		diagnosis_lat_list = Diagnosis.objects.filter(patient=patient_id).latest('id')
+		args['diagnosis_lat_list'] = diagnosis_lat_list
+		prescription_lat_list = Prescription.objects.filter(pateint_diagnosis=diagnosis_lat_list)
+		args['prescription_lat_list'] = prescription_lat_list
+	except:
+		pass
 	
 	if request.POST.get('save'):
 		diagnosis = request.POST.getlist('diagnosis')
@@ -187,6 +192,62 @@ def add_prescription(request, patient_id):
 		messages.success(request, "Successfully prescription added")
 	
 	return render(request, 'add_prescription.html', args)
+
+
+@login_required
+def delete_prescription(request,patient_id,prescription_id):
+    patient_id = get_object_or_404(PatientData, id=patient_id)
+    prescription_id = get_object_or_404(Prescription, id=prescription_id)
+    prescription_id.delete()
+    messages.success(request, "Successfully delete the prescription")
+    return HttpResponseRedirect('/add_prescription/%s/'%(patient_id.id))
+
+
+@login_required
+def certificates(request):
+	args = {}
+
+	return render(request, 'certificates.html', args)
+
+
+@login_required
+def medical_certificate(request):
+	args = {}
+	
+	return render(request, 'medical_certificate.html', args)
+
+
+@login_required
+def fitness_certificate(request):
+	args = {}
+	
+	return render(request, 'fitness_certificate.html', args)
+
+
+@login_required
+def med_fitness_certificate(request):
+	args = {}
+	
+	return render(request, 'med_fitness_certificate.html', args)
+
+@login_required
+def certificate_of_physical(request):
+	args = {}
+	
+	return render(request, 'certificate_of_physical.html', args)
+
+@login_required
+def physical_fitness(request):
+	args = {}
+	
+	return render(request, 'physical_fitness.html', args)
+
+
+@login_required
+def life_certificate(request):
+	args = {}
+	
+	return render(request, 'life_certificate.html', args)
 
 
 

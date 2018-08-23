@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}Adhiran Medical Center | Life Certificate{% endblock %}
+{% block content %}
+<style type="text/css">
+    #printcontent p{
+    margin-left: 40px !important;
+}
+    
+.prnt {
+    margin-top: 50px;
+}
+
+@media print {
+   .prnt {
+        margin-top: -30px;
+    }
+}
+
+h4{
+    text-decoration: underline;
+    
+}
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Life Certificate</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <a href="{% url 'certificates' %}" class="btn btn-danger btn-md"><i class="fa fa-times"></i> Cancel</a>
+            <a id="hrefPrint" href="#" class="btn btn-info btn-md plus">Print Certificate</a>
+        </div>
+    </div>
+</div>
+
+<div class="prnt" id="printcontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 style="font-size:20px;margin-left:280px;margin-top:-20px;"><strong>ANNEXURE-I</strong></h4>
+            <h4 style="font-size:20px;margin-left:310px;"><strong>PART-A</strong></h4>
+            <h4 style="font-size:20px;margin-left:260px;"><strong>LIFE CERTIFICATE</strong></h4>
+            <strong style="font-size:18px;margin-left:100px;">[To be submitted by Pensioner/Family Pensioner once a year]</strong><br/><br/>
+            <p style="font-size:18px;">
+                Certified that I have seen the Pensioner/Family Pensioner Thiru/Tmt./<br/>
+                ........................................................................................................................................<br/>
+                ........................................................................................................................................<br/><br/>
+                holder of<br/>
+                P.P.O No.<br/><br/>
+                and that he/she is alive on this date.<br/><br/><br/>
+                Specimen Signature of Pensioner/Family Pensioner/Exgratia beneficiary<br/><br/><br/>
+            </p>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Officer</p>
+                </div>
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Signature of the Attesting</p>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p></p>
+                </div>
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Name:</p>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Place:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Designation:</p>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Date:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p style="font-size:18px;">Office Seal:</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<link rel="stylesheet" href="/static/assets/css/jquery-ui.css">
+<style>
+    .ui-widget-header {
+        background: none;
+        background-color: yellow;
+        border: 1px solid #aaaaaa ;
+        color: #222222 ;
+        font-weight: bold;
+    }
+</style>
+<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.min.css">
+<script src="/static/assets/js/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery.easy-confirm-dialog.js"></script>
+<script type="text/javascript" src="/static/assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#hrefPrint").click(function() {
+            $("#printcontent").print();
+                return (false);
+        });
+    });
+</script>
+{% endblock %}

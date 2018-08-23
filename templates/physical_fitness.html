@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Adhiran Medical Center | Physical Fitness Certificate{% endblock %}
+{% block content %}
+<style type="text/css">
+    #printcontent p{
+    margin-left: 40px !important;
+}
+    
+.prnt {
+    margin-top: 50px;
+}
+
+@media print {
+   .prnt {
+        margin-top: -30px;
+    }
+}
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Physical Fitness Certificate</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <a href="{% url 'certificates' %}" class="btn btn-danger btn-md"><i class="fa fa-times"></i> Cancel</a>
+            <a id="hrefPrint" href="#" class="btn btn-info btn-md plus">Print Certificate</a>
+        </div>
+    </div>
+</div>
+
+<div class="prnt" id="printcontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 style="font-size:20px;margin-left:190px;margin-top:-70px;"><strong>PHYSICAL FITNESS CERTIFICATE</strong></h4>
+            <strong style="margin-left:290px;">(Rule 13 Part IKSR)</strong><br/>
+            <strong style="margin-left:200px;">[G.O.(P) No.20/2011/P&ARD dated 30/06/2011]</strong>
+            <p style="margin-top:20px";>&nbsp;&nbsp;&nbsp;&nbsp;
+                I do hereby certify that I have examined Shri/Smt.........................................................................................<br/>
+                ............................................................................................................................................................................<br/>
+                ............................................................................................................................................................................<br/>
+                a candidate for employment in the......................................................................................................................<br/>department and cannot discover that he/she has any disease, bodily or constitutional affection except<br/>
+                ............................................................................................................................................................................<br/>
+                I do not consider this a dis qualification for the post of.......................................................................................<br/>
+                ...............................................................His/Her age is according to his/her own statement is..........................<br/>
+                years and by appearance.............................years.<br/><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;He/She has normal distant vision (.................................................................................................................)<br/>
+                and he/she is free from colour blindness.<br/><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;He/She has been vaccinated/re-vaccinated or bears marks of successfull vaccination.<br/><br/>
+                Identification marks:<br/><br/>
+                1.<br/><br/>
+                2.<br/><br/>
+                *Physical Measurement:<br/><br/>
+                Height          :<br/><br/>
+                Weight          :<br/><br/>
+                Chest-Normal    :<br/><br/>
+                Expanded        :<br/><br/>
+            </p>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Station:</p>
+                    <p>Date:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Signature of Medical Officer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+</div>
+
+<link rel="stylesheet" href="/static/assets/css/jquery-ui.css">
+<style>
+    .ui-widget-header {
+        background: none;
+        background-color: yellow;
+        border: 1px solid #aaaaaa ;
+        color: #222222 ;
+        font-weight: bold;
+    }
+</style>
+<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.min.css">
+<script src="/static/assets/js/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery.easy-confirm-dialog.js"></script>
+<script type="text/javascript" src="/static/assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#hrefPrint").click(function() {
+            $("#printcontent").print();
+                return (false);
+        });
+    });
+</script>
+{% endblock %}

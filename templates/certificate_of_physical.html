@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block title %}Adhiran Medical Center | Certificate of Physical Fitness{% endblock %}
+{% block content %}
+<style type="text/css">
+    #printcontent p{
+    margin-left: 40px !important;
+}
+    
+.prnt {
+    margin-top: 50px;
+}
+
+@media print {
+   .prnt {
+        margin-top: -30px;
+    }
+}
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Certificate of Physical Fitness</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <a href="{% url 'certificates' %}" class="btn btn-danger btn-md"><i class="fa fa-times"></i> Cancel</a>
+            <a id="hrefPrint" href="#" class="btn btn-info btn-md plus">Print Certificate</a>
+        </div>
+    </div>
+</div>
+
+<div class="prnt" id="printcontent">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 style="font-size:20px;margin-left:190px;margin-top:-70px;"><strong>CERTIFICATE OF PHYSICAL FITNESS</strong></h4>
+            <h4 style="font-size:15px;margin-left:150px;"><strong>BY A SINGLE MEDICAL OFFICER /THE CIVIL MEDICAL BOARD</strong></h4>
+            <p style="margin-top:20px";>
+                Signature of Candidate.................................................................................................................................<br/>I / We do hereby certify that I / We have examined (full name) Thiru / Thirumathi / Selvan /<br/>Selvi..............................................................................................................................................................<br/>
+                I a Candidate......................................for employment under the Government as...............................in the<br/>.....................................................office...........................in the.....................................................................<br/>department whose signature is given above and could not discover that he / she has any disease,<br/>communicable or otherwise, constitutional affliction or infirmity / except that his/ her weight is in<br/>excess of / below the standard prescribed, or except.<br/><br/>
+                I / We do not consider this a disqualification for the employment he / she seeks.<br/>
+                His / Her age is according to his / her own statement....................................years and by appearance<br/>
+                about...................................................years.<br/><br/>
+                I / We also certify that he / she marks of smallbox / vaccination.
+                
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="example">
+                                <tr>
+                                    <th rowspan="2">Chest measurement</th>
+                                    <th>on full inspiration</th>
+                                    <th>on full expiration</th>
+                                    <th>diffenrent(expansion)</th>
+                                </tr>
+                                <tr>
+                                    <td align="right">cm</td>
+                                    <td align="right">cm</td>
+                                    <td align="right">cm</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top:-15px;">
+        <div class="col-sm-12">
+            <p>
+                Weight in Kg.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<br/>
+                Cardio Vascular System&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<br/>
+                Respiratory System&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<br/>
+                His / Her vision is normal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<br/>
+                Hypermetropic / ..................................... Myopia / .................................Astigmatic...........................................<br/>
+                (Enter here the degree of defect and the strength of correction glasses.)<br/>
+                Hearing is normal,defective (much or slight)<br/>
+                Urine - Does chemical examination show<br/>
+                (i) Albumin.......................................... (ii) Sugar................................State specific gravity................................<br/>
+                Personal marks(atleast two should be metioned)<br/>
+                For Identification marks&nbsp;1.<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.
+            </p>
+                    
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Signature</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>President</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Rank</p>
+                </div>
+                <div class="col-sm-6">
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Designation</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Members (i)<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ii)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Station:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Station:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Date:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p>Date:</p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+</div>
+
+<link rel="stylesheet" href="/static/assets/css/jquery-ui.css">
+<style>
+    .ui-widget-header {
+        background: none;
+        background-color: yellow;
+        border: 1px solid #aaaaaa ;
+        color: #222222 ;
+        font-weight: bold;
+    }
+</style>
+<link rel="stylesheet" href="/static/assets/css/bootstrap-timepicker.min.css">
+<script src="/static/assets/js/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery.easy-confirm-dialog.js"></script>
+<script type="text/javascript" src="/static/assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#hrefPrint").click(function() {
+            $("#printcontent").print();
+                return (false);
+        });
+    });
+</script>
+{% endblock %}
